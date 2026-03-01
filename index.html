@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="bs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sretan 8. mart 💐</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffb6d5, #fff);
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .box {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      max-width: 90%;
+      position: relative;
+      z-index: 10;
+    }
+    button {
+      padding: 15px 25px;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      background: #ff4d88;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #e63971;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Sretan 8. Mart 💐</h1>
+    <p>Za osmijeh koji uljepšava svaki dan i ljubav koju nesebično daješ ❤️</p>
+
+    <button onclick="document.getElementById('music').play()">
+      ▶️ Pusti pjesmu
+    </button>
+
+    <audio id="music">
+      </audio>
+  </div>
+
+  <script>
+    // 1. Čitamo dodatak iz linka (tarabu), npr. "#pjesma7"
+    let hash = window.location.hash;
+
+    // 2. Podrazumijevana pjesma (ako link nema broj ili je samo index.html)
+    let nazivPjesme = "pjesma1.mp3";
+
+    // 3. Ako link počinje sa "#pjesma", provjeravamo koji je broj
+    if (hash.startsWith("#pjesma")) {
+        // Brišemo riječ "#pjesma" da nam ostane samo broj (npr. iz "#pjesma7" ostaje "7")
+        let broj = hash.replace("#pjesma", "");
+
+        // Provjeravamo da li je broj od 1 do 10
+        if (broj >= 1 && broj <= 10) {
+            nazivPjesme = "pjesma" + broj + ".mp3";
+        }
+    }
+
+    // 4. Ubacujemo tačnu pjesmu u plejer
+    const audioPlayer = document.getElementById('music');
+    audioPlayer.innerHTML = '<source src="' + nazivPjesme + '" type="audio/mpeg">';
+    audioPlayer.load();
+  </script>
+</body>
+</html>
