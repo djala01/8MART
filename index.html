@@ -54,24 +54,20 @@
   </div>
 
   <script>
-    // 1. Čitamo dodatak iz linka (tarabu), npr. "#pjesma7"
     let hash = window.location.hash;
+    let nazivPjesme = "pjesma1.mp3"; // Podrazumijevana pjesma
 
-    // 2. Podrazumijevana pjesma (ako link nema broj ili je samo index.html)
-    let nazivPjesme = "pjesma1.mp3";
+    // Pametno traženje broja u linku (izvlači bilo koji broj koji nađe)
+    let match = hash.match(/\d+/); 
 
-    // 3. Ako link počinje sa "#pjesma", provjeravamo koji je broj
-    if (hash.startsWith("#pjesma")) {
-        // Brišemo riječ "#pjesma" da nam ostane samo broj (npr. iz "#pjesma7" ostaje "7")
-        let broj = hash.replace("#pjesma", "");
-
-        // Provjeravamo da li je broj od 1 do 10
+    if (match) {
+        let broj = parseInt(match[0]);
+        // Provjerava da li je broj između 1 i 10
         if (broj >= 1 && broj <= 10) {
             nazivPjesme = "pjesma" + broj + ".mp3";
         }
     }
 
-    // 4. Ubacujemo tačnu pjesmu u plejer
     const audioPlayer = document.getElementById('music');
     audioPlayer.innerHTML = '<source src="' + nazivPjesme + '" type="audio/mpeg">';
     audioPlayer.load();
